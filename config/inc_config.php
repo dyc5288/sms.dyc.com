@@ -29,3 +29,12 @@ $GLOBALS["CONFIG"]["LIBRARY"]["lib_database"]  = PATH_LIBRARY . "/lib_database.p
 $GLOBALS["CONFIG"]["LIBRARY"]["lib_func"]      = PATH_LIBRARY . "/lib_func.php";
 $GLOBALS["CONFIG"]["LIBRARY"]["lic_memcached"] = PATH_LIBRARY . "/lib_memcached.php";
 $GLOBALS["CONFIG"]["LIBRARY"]["lib_gearman"]   = PATH_LIBRARY . "/lib_gearman.php";
+
+/* 邮件配置 */
+$GLOBALS['CONFIG']['mail'] = array(
+    'Host' => 'smtp.163.com',
+    'Username' => 'dyc5299@163.com',
+    'Password' => 'd54321',
+    'From' => 'dyc5299@163.com',
+    'FromName' => '云朝'
+);
