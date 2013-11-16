@@ -1,12 +1,12 @@
 <?php
 //////////////////////////////////////////////SETTINGS//////////////////////////////////////////////
-define('MAIL_TO', '');                          //To 接收人邮件地址，接收从本页面发送邮件的邮箱
-define('MAIL_TO_NAME', 'Myself');               //To Name 友好的收件人称呼
-define('MAIL_FROM', '');                        //From 发件人邮件地址
-define('MAIL_FROM_NAME', 'Mail me page');       //From name 友好的发件人称呼
-define('MAIL_SMTP_HOST', '');                   //SMTP Server 发信服务器，如smtp.qq.com
-define('MAIL_SMTP_USER', '');                   //SMTP User smtp用户名，如253719360@qq.com
-define('MAIL_SMTP_PASS', '');                   //SMTP Pass smtp密码，如qq邮箱密码
+define('MAIL_TO', 'dyc5288@qq.com');               //接收人邮件地址，接收从本页面发送邮件的邮箱
+define('MAIL_TO_NAME', '云朝接收');               //To Name 友好的收件人称呼
+define('MAIL_FROM', 'dyc5288@163.com');                        //From 发件人邮件地址
+define('MAIL_FROM_NAME', '云朝发送');       //From name 友好的发件人称呼
+define('MAIL_SMTP_HOST', 'smtp.163.com');                   //SMTP Server 发信服务器，如smtp.qq.com
+define('MAIL_SMTP_USER', 'dyc5288@163.com');                   //SMTP User smtp用户名，如253719360@qq.com
+define('MAIL_SMTP_PASS', 'd16+dj12');                   //SMTP Pass smtp密码，如qq邮箱密码
 
 define('FETION_PHONE_NUM', '');                 //Phone  飞信账号电话号码，这里只能是数字手机号码
 define('FETION_PASSWORD', '');                  //Password 飞信密码
