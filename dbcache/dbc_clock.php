@@ -128,7 +128,7 @@ class dbc_clock
 
         $table  = hlp_common::get_split_table($user_id, self::TABLE_NAME);
         $sql    = "SELECT * FROM {$table['name']} WHERE state = '1' limit 2000";
-        $result = cls_database::get_all($sql, $table['index']);
+        $result = lib_database::get_all($sql, $table['index']);
 
         if ($is_cache)
         {
