@@ -26,4 +26,5 @@ $GLOBALS['DATABASE']['section'][0]["ips"][0]["slave"][] = array("db_host" => "12
 $GLOBALS["DATABASE"]['MEMCACHED_PREFIX'] = array();
 
 /* dbc层 */
-$GLOBALS["DATABASE"]['MEMCACHED_PREFIX']['D_100'] = 'dbc_test::get_one';
+$GLOBALS["DATABASE"]['MEMCACHED_PREFIX']['D_100'] = 'dbc_clock::get_one';
+$GLOBALS["DATABASE"]['MEMCACHED_PREFIX']['D_101'] = 'dbc_clock::get_all_startup';
