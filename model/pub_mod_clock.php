@@ -132,7 +132,7 @@ class pub_mod_clock
      */
     public static function get_all_startup()
     {
-        $result = dbc_user_address::get_all_startup();
+        $result = dbc_clock::get_all_startup();
 
         if (!empty($result))
         {
