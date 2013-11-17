@@ -3,10 +3,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; " />
         <title>后台首页</title>
-        <link href="static/css/common.css" rel="stylesheet" type="text/css" />
-        <link href="static/css/index.css" rel="stylesheet" type="text/css" />
-        <script src="static/js/jquery.js" type="text/javascript"></script>
-        <script src="static/js/util.js" type="text/javascript"></script>
+        <link href="<{s}>css/common.css<{/s}>" rel="stylesheet" type="text/css" />
+        <link href="<{s}>css/index.css<{/s}>" rel="stylesheet" type="text/css" />
+        <script src="<{s}>js/jquery.js<{/s}>" type="text/javascript"></script>
+        <script src="<{s}>js/util.js<{/s}>" type="text/javascript" charset="gb2312"></script>
     </head>
 
     <body>
@@ -53,6 +53,6 @@
                 '223': {Text:"其他",Parent:"21",url:"other.html"}
             }
         </script>
-        <script type="text/javascript" src="static/js/main.js"></script>
+        <script type="text/javascript" charset="gb2312" src="<{s}>js/main.js<{/s}>"></script>
     </body>
 </html>
