@@ -70,7 +70,7 @@ function SILVER_ALARM($job)
                 $email               = 'dyc5288@qq.com';
                 $user_name           = "段公子";
                 $subject             = pub_mod_clock::$TYPE[pub_mod_clock::TYPE_SILVER];
-                $message             = "监控抱紧, 目前价格为";
+                $message             = "监控报警, 目前价格为";
                 $clock_list          = pub_mod_clock::get_all_startup();
 
                 if (!empty($clock_list))
