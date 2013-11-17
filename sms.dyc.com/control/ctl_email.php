@@ -30,6 +30,39 @@ class ctl_email extends ctl_parent
      */
     public function index()
     {
+        $return = array('data' => array(), 'count'          => 0);
+        $return['state'] = get_params('state', 0, 'request', false);
+        $url             = '?ct=email';
+
+        $cond = array();
+        $return['state'] !== false ? ($cond['state'] = $return['state']) : false;
+        $start         = get_params('s', 0, 'get', 0);
+        $limit         = 20;
+        $order         = 'utime desc';
+
+        $url = ($return['state'] !== false) ? $url . "&state={$return['state']}" : $url;
+
+        $return['count'] = pub_mod_clock::get_count($cond);
+        $return['data']  = pub_mod_clock::get_list($cond, $order, $start, $limit);
+
+        if (!empty($return['data']))
+        {
+            foreach ($return['data'] as &$row)
+            {
+                $row['type_name'] = isset(pub_mod_clock::$TYPE[$row['type_id']]) ? pub_mod_clock::$TYPE[$row['type_id']] : '';
+            }
+        }
+
+        /* 分页 */
+        $config = array();
+        $config['page_name']    = 's';
+        $config['count_number'] = $return['count'];
+        $config['url']          = $url;
+        $config['per_count']    = $limit;
+        $config['start']        = $start;
+        $return['page']         = pagination($config);
+
+        lib_template::assign('return', $return);
         lib_template::display('email_index.tpl');
     }
 
