@@ -15,6 +15,11 @@ class pub_mod_clock
     
     /* 业务类型 */
     const TYPE_SILVER = 1;
+    
+    /* 类型名 */
+    static $TYPE = array(
+        self::TYPE_SILVER => '白银监控'
+    );
 
     /**
      * 获取一条
@@ -97,7 +102,17 @@ class pub_mod_clock
     {
         $start = intval($start);
         $limit = intval($limit);
-        return dbc_clock::get_list($cond, $order, $start, $limit);
+        $result = dbc_clock::get_list($cond, $order, $start, $limit);
+
+        if (!empty($result))
+        {
+            foreach ($result as &$row)
+            {
+                $row['data'] = @json_decode(urldecode($row['data']), true);
+            }
+        }
+
+        return $result;
     }
 
     /**
