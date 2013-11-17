@@ -48,13 +48,30 @@ function SILVER_ALARM($job)
         {
             while (true)
             {
-                $cur_price = 4100;
+                $url       = "http://www.pmec.com/flash/data/230_AG15.xml?r=" . time();
+                $result    = curl($url);
+                $cur_price = 10000;
 
-                $email      = 'dyc5288@qq.com';
-                $user_name  = "段公子";
-                $subject    = pub_mod_clock::$TYPE[pub_mod_clock::TYPE_SILVER];
-                $message    = "监控抱紧, 目前价格为";
-                $clock_list = pub_mod_clock::get_all_startup();
+                if ($result['code'] == 200)
+                {
+                    $p    = xml_parser_create();
+                    $vals = array();
+                    $index = array();
+                    xml_parse_into_struct($p, $result['data'], $vals, $index);
+                    xml_parser_free($p);
+                    $last_index      = $index['SMBOL'][count($index['SMBOL']) - 1];
+                    $last_data       = $vals[$last_index];
+                    $last_attributes = $last_data['attributes'];
+                    $cur_time        = $last_attributes['EP'] . " " . $last_attributes['TDT'];
+                    $cur_price       = $last_attributes['EP'];
+                }
+
+                $return['cur_price'] = $cur_price;
+                $email               = 'dyc5288@qq.com';
+                $user_name           = "段公子";
+                $subject             = pub_mod_clock::$TYPE[pub_mod_clock::TYPE_SILVER];
+                $message             = "监控抱紧, 目前价格为";
+                $clock_list          = pub_mod_clock::get_all_startup();
 
                 if (!empty($clock_list))
                 {
@@ -67,8 +84,9 @@ function SILVER_ALARM($job)
 
                             if ($cur_price >= $hign || $hign <= $low)
                             {
-                                $message .= "{$cur_price}元/公斤，请关注。";
+                                $message .= "{$cur_price}元/公斤，请关注。{$cur_time}最新数据！";
                                 $return['email'][$row['cid']] = hlp_email::send_email($email, $user_name, $subject, $message);
+                                sleep(5);
                             }
                         }
                     }
