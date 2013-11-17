@@ -64,3 +64,6 @@ switch ($app)
 /* 控制层和业务层目录 */
 define('PATH_CONTROL', PATH_ROOT . CUR_DIR . '/control');
 define('PATH_MODEL', PATH_ROOT . CUR_MODEL . '/model');
+
+/* 时间戳 */
+define('ASSETS_VERSION', time());
