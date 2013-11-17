@@ -8,39 +8,29 @@
  */
 !defined('IN_INIT') && exit('Access Denied');
 
-class ctl_index
-{
+require_once 'ctl_parent.php';
 
+class ctl_index extends ctl_parent
+{
+    
+    /**
+     * 初始化
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * 首页
+     * 
+     * @return void
+     */
     public function index()
     {
-        //phpinfo();die;
-        //echo "test";
-        $return = array();
-        try
-        {
-            T(10000);
-        }
-        catch (Exception $e)
-        {
-            ET($e->getMessage(), $return);
-            $return['message'] = $e->getMessage();
-        }
-        
-        pub_mod_test::add();
-        pub_mod_test::update();
-        var_dump(pub_mod_test::get());
-        var_dump(pub_mod_test::get_list());
-        var_dump(pub_mod_test::get_count());
-        
-        lib_gearman::add_job($GLOBALS['CONFIG']['gearman'], 'MYTEST', $return, 3);
-        $result = SM('test3', 'D_100', '1');
-        var_dump($result);
-        $result = GM('D_100', '1');
-        var_dump($result);
-
-        //json_print($return);
-        lib_template::assign('return', $return);
-        lib_template::display('test.tpl');
+        lib_template::display('index.tpl');
     }
 
 }
