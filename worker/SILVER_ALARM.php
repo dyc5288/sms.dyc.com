@@ -62,7 +62,7 @@ function SILVER_ALARM($job)
                     $last_index      = $index['SMBOL'][count($index['SMBOL']) - 1];
                     $last_data       = $vals[$last_index];
                     $last_attributes = $last_data['attributes'];
-                    $cur_time        = $last_attributes['EP'] . " " . $last_attributes['TDT'];
+                    $cur_time        = $last_attributes['DT'] . " " . $last_attributes['TDT'];
                     $cur_price       = $last_attributes['EP'];
                 }
 
@@ -84,8 +84,16 @@ function SILVER_ALARM($job)
 
                             if ($cur_price >= $hign || $hign <= $low)
                             {
+                                $message                      = $row['remark'] . $message;
                                 $message .= "{$cur_price}元/公斤，请关注。{$cur_time}最新数据！";
+                                $return['message'] = $message;
                                 $return['email'][$row['cid']] = hlp_email::send_email($email, $user_name, $subject, $message);
+
+                                if (CLI_DEBUG_LEVEL)
+                                {
+                                    print_r($return);
+                                }
+                                
                                 sleep(300);
                             }
                         }
