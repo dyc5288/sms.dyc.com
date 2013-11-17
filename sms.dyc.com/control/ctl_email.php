@@ -38,7 +38,7 @@ class ctl_email extends ctl_parent
         $return['state'] !== false ? ($cond['state'] = $return['state']) : false;
         $start         = get_params('s', 0, 'get', 0);
         $limit         = 20;
-        $order         = 'utime desc';
+        $order         = 'ctime desc';
 
         $url = ($return['state'] !== false) ? $url . "&state={$return['state']}" : $url;
 
@@ -75,6 +75,7 @@ class ctl_email extends ctl_parent
     {
         $return = array('state'   => false, 'message' => '');
         $form     = get_params('form', 3);
+        $cid      = get_params('cid', 1, 'request');
 
         if (!empty($form))
         {
@@ -83,7 +84,6 @@ class ctl_email extends ctl_parent
                 $data = array();
                 $data['hign'] = isset($form['hign']) ? $form['hign'] : 0;
                 $data['low']  = isset($form['low']) ? $form['low'] : 0;
-                $cid          = isset($form['cid']) ? $form['cid'] : 0;
                 $startup      = isset($form['startup']) ? $form['startup'] : 0;
 
                 if (empty($data['hign']) || empty($data['low']))
@@ -112,7 +112,48 @@ class ctl_email extends ctl_parent
             }
         }
 
+        if (!empty($cid))
+        {
+            $return['data'] = pub_mod_clock::get_clock($cid);
+        }
+
+        lib_template::assign('return', $return);
         lib_template::display('email_silver.tpl');
+    }
+
+    /**
+     * 删除
+     * 
+     * @return void
+     */
+    public function delete()
+    {
+        $return = array('state'   => false, 'message' => '');
+        $cid      = get_params('cid', 1, 'request');
+
+        try
+        {
+            if (empty($cid))
+            {
+                T(10001);
+            }
+
+            $params = array();
+            $params['state'] = pub_mod_clock::STATE_DELETE;
+            $result          = pub_mod_clock::edit_clock($cid, $params);
+
+            if (empty($result))
+            {
+                T(10000);
+            }
+        }
+        catch (Exception $e)
+        {
+            $return['message'] = $e->getMessage();
+        }
+
+        unset($return);
+        goto_url(URL . '/?ct=email&state=1');
     }
 
 }
