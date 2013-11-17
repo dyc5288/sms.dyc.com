@@ -10,5 +10,6 @@
 !defined('IN_INIT') && exit('Access Denied');
 
 $GLOBALS['LANG'] = array(
-    '10000' => '操作失败'
+    '10000' => '操作失败',
+    '10001' => '参数错误',
 );
