@@ -67,12 +67,8 @@
         <div class="fl">
             <input name="" type="checkbox" value="" rel="parent" />
             <label for="">全选</label>
-            <button type="button" jstype="btn_post" isform="#js_test_box" posturl="">忽略</button>
-            <button type="button" jstype="btn_post" >已处理</button>
-            <button type="button" jstype="btn_post" isconfirm="1" onclick="alert(1);">删除</button>
-            <button type="button" jstype="btn_post">等待审核</button>
-            <button type="button" jstype="btn_post">审核通过</button>
-            <button type="button" jstype="btn_post">禁止下载</button>
+            <button type="button" jstype="btn_post" isform="#js_test_box" posturl="">启动</button>
+            <button type="button" jstype="btn_post" >关闭</button>
         </div>
     </form>
     <{$return.page}>
