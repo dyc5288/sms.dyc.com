@@ -13,7 +13,6 @@ class dbc_clock
      * 
      * @var string
      */
-
     const TABLE_NAME = 'dyc_clock';
 
     /**
@@ -22,16 +21,35 @@ class dbc_clock
      * @param int $tid
      * @return boolean 
      */
-    public static function get_one($cid)
+    public static function get_one($cid, $is_cache = true)
     {
         if (empty($cid))
         {
             return false;
         }
 
-        $table = hlp_common::get_split_table(null, self::TABLE_NAME);
-        $sql   = "SELECT * FROM {$table['name']} WHERE cid = '{$cid}' ";
-        return lib_database::get_one($sql, $table['index']);
+        if ($is_cache)
+        {
+            $cache_key = "{$cid}";
+            $cache     = GM('D_100', $cache_key);
+
+            if ($cache !== false)
+            {
+                return $cache;
+            }
+        }
+
+        $table  = hlp_common::get_split_table(null, self::TABLE_NAME);
+        $sql    = "SELECT * FROM {$table['name']} WHERE cid = '{$cid}' ";
+        $result = lib_database::get_one($sql, $table['index']);
+
+        if ($is_cache)
+        {
+            $result = empty($result) ? array() : $result;
+            SM($result, 'D_101', $cache_key, 86400);
+        }
+
+        return $result;
     }
 
     /**
@@ -47,8 +65,18 @@ class dbc_clock
             return false;
         }
 
-        $table = hlp_common::get_split_table(null, self::TABLE_NAME);
-        return lib_database::duplicate($key_values, $table['name'], $table['index']);
+        $key_values['ctime'] = time();
+        $table               = hlp_common::get_split_table(null, self::TABLE_NAME);
+        $result              = lib_database::duplicate($key_values, $table['name'], $table['index']);
+
+        if ($result)
+        {
+            $cid = lib_database::insert_id();
+            DM('D_100', $cid);
+            DM('D_101', 'startup');
+        }
+
+        return $result;
     }
 
     /**
@@ -65,9 +93,50 @@ class dbc_clock
             return false;
         }
 
-        $table = hlp_common::get_split_table(null, self::TABLE_NAME);
-        $where = " cid = '{$cid}' ";
-        return lib_database::update($key_values, $where, $table['name'], $table['index']);
+        $table               = hlp_common::get_split_table(null, self::TABLE_NAME);
+        $where               = " cid = '{$cid}' ";
+        $key_values['utime'] = time();
+        $result              = lib_database::update($key_values, $where, $table['name'], $table['index']);
+
+        if ($result)
+        {
+            $cid = lib_database::insert_id();
+            DM('D_100', $cid);
+            DM('D_101', 'startup');
+        }
+
+        return $result;
+    }
+
+    /**
+     * 获取所有启动的定时器
+     *
+     * @param boolean $is_cache
+     * @return array 
+     */
+    public static function get_all_startup($is_cache = true)
+    {
+        if ($is_cache)
+        {
+            $cache = GM('D_101', 'startup');
+
+            if ($cache !== false)
+            {
+                return $cache;
+            }
+        }
+
+        $table  = hlp_common::get_split_table($user_id, self::TABLE_NAME);
+        $sql    = "SELECT * FROM {$table['name']} WHERE state = '1' limit 2000";
+        $result = cls_database::get_all($sql, $table['index']);
+
+        if ($is_cache)
+        {
+            $result = empty($result) ? array() : $result;
+            SM($result, 'D_101', 'startup', 86400);
+        }
+
+        return $result;
     }
 
     /**
