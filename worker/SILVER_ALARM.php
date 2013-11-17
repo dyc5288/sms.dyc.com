@@ -86,7 +86,7 @@ function SILVER_ALARM($job)
                             {
                                 $message .= "{$cur_price}元/公斤，请关注。{$cur_time}最新数据！";
                                 $return['email'][$row['cid']] = hlp_email::send_email($email, $user_name, $subject, $message);
-                                sleep(5);
+                                sleep(300);
                             }
                         }
                     }
