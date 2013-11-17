@@ -26,7 +26,14 @@ class pub_mod_clock
             return false;
         }
 
-        return dbc_clock::get_one($cid);
+        $result = dbc_clock::get_one($cid);
+
+        if ($result)
+        {
+            $result['data'] = @json_decode(urldecode($result['data']), true);
+        }
+
+        return $result;
     }
 
     /**
@@ -107,7 +114,17 @@ class pub_mod_clock
      */
     public static function get_all_startup()
     {
-        return dbc_user_address::get_all_startup();
+        $result = dbc_user_address::get_all_startup();
+
+        if (!empty($result))
+        {
+            foreach ($result as &$row)
+            {
+                $row['data'] = @json_decode(urldecode($row['data']), true);
+            }
+        }
+
+        return $result;
     }
 
 }
