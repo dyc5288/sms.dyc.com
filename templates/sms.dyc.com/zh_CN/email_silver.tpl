@@ -7,27 +7,30 @@
         </tr>
         <tr>
             <th>高：</th>
-            <td><input type="text" name="form[hign]" class="text s" vali="notempty|num" errormsg="请输入预警提示最高价且应为数字" />&nbsp;元/公斤 <span class="text-hint normal">当白银价格大于当前值进行报警</span> </td>
+            <td><input type="text" name="form[hign]" class="text s" vali="notempty|num" <{if !empty($return.data)}>value="<{$return.data.data.hign}>"<{/if}> errormsg="请输入预警提示最高价且应为数字" />&nbsp;元/公斤 <span class="text-hint normal">当白银价格大于当前值进行报警</span> </td>
         </tr>
         <tr>
             <th>低：</th>
-            <td><input type="text" name="form[low]" class="text s" vali="notempty|num" errormsg="请输入预警提示最低价且应为数字" />&nbsp;元/公斤 <span class="text-hint normal">当白银价格小于当前值进行报警</span></td>
+            <td><input type="text" name="form[low]" class="text s" vali="notempty|num" <{if !empty($return.data)}>value="<{$return.data.data.low}>"<{/if}> errormsg="请输入预警提示最低价且应为数字" />&nbsp;元/公斤 <span class="text-hint normal">当白银价格小于当前值进行报警</span></td>
         </tr>
         <tr>
         <tr>
             <th>描述：</th>
-            <td><textarea id="" name="form[remark]" vali="notempty"  errormsg="请输入内容" ></textarea></td>
+            <td><textarea id="" name="form[remark]" vali="notempty"  errormsg="请输入内容" ><{if !empty($return.data)}><{$return.data.remark}><{/if}></textarea></td>
         </tr>        
         <tr>
             <th>状态：</th>
             <td>
-                <input type="checkbox" name="form[startup]" id="startup" value="1"/>
+                <input type="checkbox" name="form[startup]" id="startup" value="1" <{if !empty($return.data) && $return.data.state == '1'}>checked="checked"<{/if}>/>
                 <label for="startup">启动</label>
             </td>
         </tr>
         <tr>
             <th></th>
-            <td><button type="submit">确定</button></td>
+            <td>
+                <input type="hidden" name="cid" <{if !empty($return.data)}>value="<{$return.data.cid}>"<{/if}>>
+                <button type="submit">确定</button>
+            </td>
         </tr>
     </table>
 </form>
