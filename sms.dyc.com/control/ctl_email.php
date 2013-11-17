@@ -31,16 +31,16 @@ class ctl_email extends ctl_parent
     public function index()
     {
         $return = array('data' => array(), 'count'          => 0);
-        $return['state'] = get_params('state', 0, 'request', false);
+        $return['state'] = get_params('state', 0, 'request', -1);
         $url             = '?ct=email';
 
         $cond = array();
-        $return['state'] !== false ? ($cond['state'] = $return['state']) : false;
+        $return['state'] !== -1 ? ($cond['state'] = $return['state']) : false;
         $start         = get_params('s', 0, 'get', 0);
         $limit         = 20;
         $order         = 'ctime desc';
 
-        $url = ($return['state'] !== false) ? $url . "&state={$return['state']}" : $url;
+        $url = ($return['state'] !== -1) ? $url . "&state={$return['state']}" : $url;
 
         $return['count'] = pub_mod_clock::get_count($cond);
         $return['data']  = pub_mod_clock::get_list($cond, $order, $start, $limit);
