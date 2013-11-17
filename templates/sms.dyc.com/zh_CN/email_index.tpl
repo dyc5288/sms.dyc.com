@@ -4,10 +4,10 @@
         <dt>状态：</dt>
         <dd>
             <ul>
-                <li class="focus"><a href="?ct=email">全部</a></li>
-                <li><a href="?ct=email&state=0">未启动</a></li>
-                <li><a href="?ct=email&state=1">已启动</a></li>
-                <li><a href="?ct=email&state=2">已删除</a></li>
+                <li <{if $return.state == '-1'}>class="focus"<{/if}>><a href="?ct=email">全部</a></li>
+                <li <{if $return.state == '0'}>class="focus"<{/if}>><a href="?ct=email&state=0">未启动</a></li>
+                <li <{if $return.state == '1'}>class="focus"<{/if}>><a href="?ct=email&state=1">已启动</a></li>
+                <li <{if $return.state == '2'}>class="focus"<{/if}>><a href="?ct=email&state=2">已删除</a></li>
             </ul>
         </dd>
     </dl>
