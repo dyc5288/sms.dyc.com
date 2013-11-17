@@ -561,7 +561,7 @@ function pagination($config)
     $flag = 0;
 
     //分页内容
-    $pages = '<div class="page">';
+    $pages = '<div class="pages">';
 
     if ($config['current_page'] > 1)
     {
