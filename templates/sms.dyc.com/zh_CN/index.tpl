@@ -38,19 +38,9 @@
         <script type="text/javascript">
             //数据
             var MenuData = {
-                '1': {Text:"样式"},
-                '11': {Text:"基本内容显示",Parent:"1"},
-                '111': {Text:"表单",Parent:"11",url:"form.html",Default:true},
-                '112': {Text:"表格",Parent:"11",url:"table.html"},
-                '12': {Text:"分块说明",Parent:"1"},
-                '121': {Text:"弹出层",Parent:"12",url:"pop.html"},
-                '122': {Text:"输入框",Parent:"12",url:"input.html"},
-                '123': {Text:"结果显示",Parent:"12",url:"result.html"},
-                '124': {Text:"按钮",Parent:"12",url:"botton.html"},
-                '2': {Text:"帮助"},
-                '21': {Text:"常用脚本",Parent:"2"},
-                '222': {Text:"父级API",Parent:"21",url:"parentapi.html"},
-                '223': {Text:"其他",Parent:"21",url:"other.html"}
+                '1': {Text:"邮件"},
+                '11': {Text:"定时功能",Parent:"1"},
+                '111': {Text:"现货白银",Parent:"11",url:"?ct=email",Default:true},
             }
         </script>
         <script type="text/javascript" charset="gb2312" src="<{s}>js/main.js<{/s}>"></script>
