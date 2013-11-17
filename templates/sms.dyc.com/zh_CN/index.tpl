@@ -40,7 +40,7 @@
             var MenuData = {
                 '1': {Text:"邮件"},
                 '11': {Text:"定时功能",Parent:"1"},
-                '111': {Text:"定时列表",Parent:"11",url:"?ct=email",Default:true},
+                '111': {Text:"定时列表",Parent:"11",url:"?ct=email&state=1",Default:true},
                 '112': {Text:"现货白银",Parent:"11",url:"?ct=email&ac=silver"}
             }
         </script>
