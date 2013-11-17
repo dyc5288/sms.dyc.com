@@ -12,6 +12,9 @@ class pub_mod_clock
     const STATE_DEFAULT = 0;
     const STATE_STARTUP = 1;
     const STATE_DELETE  = 2;
+    
+    /* 业务类型 */
+    const TYPE_SILVER = 1;
 
     /**
      * 获取一条
