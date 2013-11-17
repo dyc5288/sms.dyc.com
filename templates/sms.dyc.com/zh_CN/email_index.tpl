@@ -22,16 +22,30 @@
             <th>更改时间</th>
             <th>操作</th>
         </tr>
-        <tr>
-            <td><input name="" type="checkbox" value="" rel="child" /></td>
-            <td><a href="">广东女初中生"插笔门"事件视频.flv</a></td>
-            <td>192.168.1.128</td>
-            <td>2010-01-26</td>
-            <td><i class="result neglect">忽略</i></td>
-            <td>5</td>
-            <td>5</td>
-            <td><a href="javascript:;" class="btn edit">编辑</a> <a href="ajaxreturn.html" class="btn delete" jsbotton="confirm" isajax="1">删除</a> <a href="javascript:;" class="btn download">下载</a></td>
-        </tr>
+        <{if !empty($return.data)}>
+            <{foreach from=$return.data item=clock}>
+                <tr>
+                    <td><input name="" type="checkbox" value="" rel="child" /></td>
+                    <td><{$clock.cid}></td>
+                    <td><{$clock.type_name}></td>
+                    <td><{$clock.remark}></td>
+                    <td>
+                        <{if $clock.state == 0}>
+                            <i class="result neglect">未启动</i>
+                        <{elseif $clock.state == 1}>
+                            <i class="result" style="color: red;">已启动</i>
+                        <{elseif $clock.state == 2}>
+                            <i class="result undone">已删除</i>
+                        <{/if}>
+                    </td>
+                    <td><{$clock.ctime|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+                    <td><{$clock.utime|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+                    <td><a href="javascript:;" class="btn edit">编辑</a> <a href="ajaxreturn.html" class="btn delete" jsbotton="confirm" isajax="1">删除</a></td>
+                </tr>
+            <{/foreach}>
+        <{else}>
+            <tr><td colspan="8">暂无</td></tr>
+        <{/if}>
     </table>
 </div>
 
@@ -48,6 +62,6 @@
             <button type="button" jstype="btn_post">禁止下载</button>
         </div>
     </form>
-    <div class="pages"><a href="" class="disabled">&#8249;</a> <a href="" class="focus">1</a> <a href="">2</a> <a href="">3</a> <a href="">4</a> <a href="">5</a> <span>…</span> <a href="">114</a> <a href="">115</a> <a href="">&#8250;</a></div>
+    <{$return.page}>
 </div>
 <{include file="footer.tpl"}>
