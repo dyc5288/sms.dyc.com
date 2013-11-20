@@ -48,24 +48,9 @@ function SILVER_ALARM($job)
         {
             while (true)
             {
-                $url       = "http://www.pmec.com/flash/data/230_AG15.xml?r=" . time();
-                $result    = curl($url);
-                $cur_price = 10000;
-
-                if ($result['code'] == 200)
-                {
-                    $p    = xml_parser_create();
-                    $vals = array();
-                    $index = array();
-                    xml_parse_into_struct($p, $result['data'], $vals, $index);
-                    xml_parser_free($p);
-                    $last_index      = $index['SMBOL'][count($index['SMBOL']) - 1];
-                    $last_data       = $vals[$last_index];
-                    $last_attributes = $last_data['attributes'];
-                    $cur_time        = $last_attributes['DT'] . " " . $last_attributes['TDT'];
-                    $cur_price       = $last_attributes['EP'];
-                }
-
+                $silver_obj          = pub_mod_silver::get_curr_silver();
+                $cur_price           = $silver_obj['price'];
+                $cur_time            = $silver_obj['time'];
                 $return['cur_price'] = $cur_price;
                 $email               = 'dyc5288@qq.com';
                 $user_name           = "段公子";
@@ -86,14 +71,14 @@ function SILVER_ALARM($job)
                             {
                                 $message                      = $row['remark'] . $message;
                                 $message .= "{$cur_price}元/公斤，请关注。{$cur_time}最新数据！";
-                                $return['message'] = $message;
+                                $return['message']            = $message;
                                 $return['email'][$row['cid']] = hlp_email::send_email($email, $user_name, $subject, $message);
 
                                 if (CLI_DEBUG_LEVEL)
                                 {
                                     print_r($return);
                                 }
-                                
+
                                 sleep(300);
                             }
                         }
@@ -105,7 +90,7 @@ function SILVER_ALARM($job)
                     print_r($return);
                 }
 
-                sleep(1);
+                sleep(10);
             }
 
             $return['state'] = true;
