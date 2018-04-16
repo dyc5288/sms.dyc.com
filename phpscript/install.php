@@ -26,7 +26,7 @@ if (!empty($flag['dyc_clock']))
     $sql    = "CREATE TABLE IF NOT EXISTS `%s` (
         `cid` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
         `type_id` tinyint(4) NOT NULL DEFAULT '0' COMMENT  '类型ID',
-        `data` text NOT NULL DEFAULT '' COMMENT '数据根据具体业务不一样',
+        `data` text NOT NULL COMMENT '数据根据具体业务不一样',
         `ctime` int(10) DEFAULT NULL DEFAULT '0' COMMENT '添加时间',
         `utime` int(10) DEFAULT NULL DEFAULT '0' COMMENT '修改时间',
         `state` tinyint(4) DEFAULT NULL DEFAULT '0' COMMENT '0：关闭，1：开启，2：删除',

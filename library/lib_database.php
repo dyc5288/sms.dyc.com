@@ -66,7 +66,7 @@ class lib_database
      *
      * @param boolean $is_read
      * @param string $index
-     * @return void
+     * @return bool
      */
     protected static function init_mysql($is_read, $index)
     {

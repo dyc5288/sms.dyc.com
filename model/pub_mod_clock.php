@@ -25,7 +25,7 @@ class pub_mod_clock
      * 获取一条
      *
      * @param int $cid
-     * @return array
+     * @return array|bool
      */
     public static function get_clock($cid)
     {
@@ -44,11 +44,13 @@ class pub_mod_clock
         return $result;
     }
 
-    /**
-     * 添加
-     * 
-     * @return void
-     */
+	/**
+	 * 添加
+	 * @param $cid
+	 * @param $params
+	 *
+	 * @return bool|int
+	 */
     public static function edit_clock($cid, $params)
     {
         if (empty($params))
@@ -93,11 +95,15 @@ class pub_mod_clock
         }
     }
 
-    /**
-     * 获取列表
-     * 
-     * @return void
-     */
+	/**
+	 * 获取列表
+	 * @param $cond
+	 * @param $order
+	 * @param int $start
+	 * @param int $limit
+	 *
+	 * @return array
+	 */
     public static function get_list($cond, $order, $start = 0, $limit = 10)
     {
         $start = intval($start);
@@ -118,7 +124,7 @@ class pub_mod_clock
     /**
      * 获取个数
      * 
-     * @return void
+     * @return int
      */
     public static function get_count($cond)
     {

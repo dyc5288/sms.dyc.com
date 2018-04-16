@@ -18,8 +18,9 @@ class dbc_clock
     /**
      * 单条
      *
-     * @param int $tid
-     * @return boolean 
+     * @param int $cid
+     * @param bool $is_cache
+     * @return array|bool
      */
     public static function get_one($cid, $is_cache = true)
     {
@@ -43,7 +44,7 @@ class dbc_clock
         $sql    = "SELECT * FROM {$table['name']} WHERE cid = '{$cid}' ";
         $result = lib_database::get_one($sql, $table['index']);
 
-        if ($is_cache)
+        if ($is_cache && !empty($cache_key))
         {
             $result = empty($result) ? array() : $result;
             SM($result, 'D_101', $cache_key, 86400);
@@ -112,7 +113,7 @@ class dbc_clock
      * 获取所有启动的定时器
      *
      * @param boolean $is_cache
-     * @return array 
+     * @return array|bool
      */
     public static function get_all_startup($is_cache = true)
     {
@@ -126,7 +127,7 @@ class dbc_clock
             }
         }
 
-        $table  = hlp_common::get_split_table($user_id, self::TABLE_NAME);
+        $table  = hlp_common::get_split_table(null, self::TABLE_NAME);
         $sql    = "SELECT * FROM {$table['name']} WHERE state = '1' limit 2000";
         $result = lib_database::get_all($sql, $table['index']);
 
@@ -162,7 +163,7 @@ class dbc_clock
      * 获取数据
      *
      * @param array $cond
-     * @return array
+     * @return int|bool
      */
     public static function get_count($cond)
     {

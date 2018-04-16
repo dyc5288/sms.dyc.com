@@ -352,7 +352,8 @@ function is_serialize($string)
  */
 function SM($value, $preifx, $key = false, $expire = 3600)
 {
-    return lib_memcached::set_cache($value, $preifx, $key, $expire);
+	return false;
+    //return lib_memcached::set_cache($value, $preifx, $key, $expire);
 }
 
 /**
@@ -362,7 +363,8 @@ function SM($value, $preifx, $key = false, $expire = 3600)
  */
 function GM($preifx, $key = false)
 {
-    return lib_memcached::get_cache($preifx, $key);
+	return false;
+    //return lib_memcached::get_cache($preifx, $key);
 }
 
 /**
@@ -372,7 +374,8 @@ function GM($preifx, $key = false)
  */
 function DM($preifx, $key = false)
 {
-    return lib_memcached::del_cache($preifx, $key);
+	return false;
+    //return lib_memcached::del_cache($preifx, $key);
 }
 
 /**
@@ -673,8 +676,8 @@ function get_session($key)
  * @param string $field 表单字段
  * @param int $value_type 表单字段数据类型 0:整型；1：字符串;2：浮点型;3:数组型
  * @param string $method
- * @param string $default_value 默认值
- * @return void 
+ * @param string|bool $default_value 默认值
+ * @return mixed
  */
 function get_params($field, $value_type, $method = 'post', $default_value = false)
 {
@@ -716,9 +719,6 @@ function get_params($field, $value_type, $method = 'post', $default_value = fals
                 break;
             case 3:
                 $return = (array) ($return);
-                break;
-            default:
-                $return = $return;
                 break;
         }
     }

@@ -10,7 +10,7 @@ $GLOBALS["DATABASE"] = array();
 
 /* my数据库 */
 $GLOBALS['DATABASE']['databases']['db_user']    = 'dyc_sms';
-$GLOBALS['DATABASE']['databases']['db_pass']    = '123456';
+$GLOBALS['DATABASE']['databases']['db_pass']    = 'D123+456d';
 $GLOBALS['DATABASE']['databases']['db_name']    = 'dyc_sms';
 $GLOBALS['DATABASE']['databases']['db_charset'] = 'utf-8';
 
